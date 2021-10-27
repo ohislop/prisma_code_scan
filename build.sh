@@ -7,7 +7,7 @@ export BLUEPRINTS_PATTERNS_REPO_NAME="bp-patterns"
 export BLUEPRINTS_CA_REPO_NAME="bp-assurance-policies"
 export BLUEPRINTS_SECURITY_CERTIFICATION_REPO_NAME="bp-security-certifications"
 export BLUEPRINTS_REPO_PROJECT="terraform-modules"
-export BLUEPRINTS_REPO_HOST="github.service.anz"
+export BLUEPRINTS_REPO_HOST="github.service."
 export AWS_DEFAULT_REGION="ap-southeast-2"
 export CONTROL_ID_IMPLEMENTED_OUTPUT_FILE="__controls_implemented.json"
 export CONTROL_ID_DISCOVERY_PATTERN="// "
@@ -23,7 +23,7 @@ if uname -a | grep -q Microsoft; then
     alias gsed="sed"
 fi
 
-echo "# ANZ Building Blocks" >"../README.md"
+echo "#  Building Blocks" >"../README.md"
 echo "## Cloud Services & Controls" >>"../README.md"
 echo "[Subscribe to changes in this project](https://raw.$BLUEPRINTS_REPO_HOST/$BLUEPRINTS_REPO_PROJECT/$BLUEPRINTS_BUILDING_BLOCKS_REPO_NAME/master/rss.xml) (RSS)" >>"../README.md"
 echo "\nBelow is a breakdown per cloud / services / resource / security controls implemented in this project\n" >> "../README.md"
@@ -33,7 +33,7 @@ echo "|----|----|----|----|" >>"../README.md"
 for cloud in ../*; do
     if [ -d "$cloud" ] && [ ! -L "$cloud" ] && [[ ${cloud} != *"__"* ]]; then
 
-        echo "## ANZ Building Blocks" >"$cloud/README.md"
+        echo "##  Building Blocks" >"$cloud/README.md"
         echo "\nBelow is a breakdown per cloud / services / resource / security controls implemented in this project\n" >> "$cloud/README.md"
         echo "| cloud | service | resource | securitycontrols |" >>"$cloud/README.md"
         echo "|----|----|----|----|" >>"$cloud/README.md"
@@ -65,10 +65,10 @@ for cloud in ../*; do
 
                         # generate name and version for each building block
                         if [[ $cloud_name == *"google"* ]]; then
-                            echo "{\"name\": \"anz-$cloud_name-$service_name-$resource_name\"," >$resource/__meta.json
+                            echo "{\"name\": \"-$cloud_name-$service_name-$resource_name\"," >$resource/__meta.json
                             echo "\"version_blueprint\": \"$GOOGLE_VERSION_BLUEPRINTS\", \"version_certification\": \"$GOOGLE_VERSION_CERTIFICATION\"}" >>$resource/__meta.json
                         elif [[ $cloud_name == *"aws"* ]]; then
-                            echo "{\"name\": \"anz-$cloud_name-$service_name-$resource_name\"," >$resource/__meta.json
+                            echo "{\"name\": \"-$cloud_name-$service_name-$resource_name\"," >$resource/__meta.json
                             echo "\"version_blueprint\": \"$AWS_VERSION_BLUEPRINTS\", \"version_certification\": \"$AWS_VERSION_CERTIFICATION\"}" >>$resource/__meta.json
                         fi
 
